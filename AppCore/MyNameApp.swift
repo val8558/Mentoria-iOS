@@ -6,3 +6,14 @@
 //
 
 import Foundation
+import SwiftUI
+
+@main
+struct ArticleWaveApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ArticleStartViewRepresentable()
+                .padding()
+        }
+    }
+}
