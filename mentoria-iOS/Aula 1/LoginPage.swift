@@ -40,14 +40,18 @@ final class LoginPage: UIView {
         title.translatesAutoresizingMaskIntoConstraints = false
         title.textColor = .titleColor
         
-        
         let textField = UITextField()
         textField.placeholder = "Usuário"
         textField.textAlignment = .left
-        textField.font = .roboto(size: 16, weight: .regular)
+        textField.font = .roboto(size: 14, weight: .regular)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .none
-        textField.textColor = .titleColor
+        textField.textColor = .white
+        
+        let screenWidth = UIScreen.main.bounds.width
+        
+        textField.widthAnchor.constraint(equalToConstant: screenWidth * 0.8).isActive = true
+        
         
         let bottomBorder = UIView()
         bottomBorder.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +65,7 @@ final class LoginPage: UIView {
             bottomBorder.trailingAnchor.constraint(equalTo: textField.trailingAnchor),
             bottomBorder.bottomAnchor.constraint(equalTo: textField.bottomAnchor),
             
-            title.bottomAnchor.constraint(equalTo: textField.topAnchor, constant: 8),
+            title.bottomAnchor.constraint(equalTo: textField.topAnchor, constant: -8),
         ])
             
         return textField
@@ -80,10 +84,14 @@ final class LoginPage: UIView {
         passwordField.placeholder = "Senha"
         passwordField.isSecureTextEntry = true
         passwordField.textAlignment = .left
-        passwordField.font = .systemFont(ofSize: 16, weight: .regular)
+        passwordField.font = .systemFont(ofSize: 14, weight: .regular)
         passwordField.translatesAutoresizingMaskIntoConstraints = false
         passwordField.borderStyle = .none
         passwordField.textColor = .white
+        
+        let screenWidth = UIScreen.main.bounds.width
+        
+        passwordField.widthAnchor.constraint(equalToConstant: screenWidth * 0.8).isActive = true
         
         let bottomBorder = UIView()
         bottomBorder.translatesAutoresizingMaskIntoConstraints = false
@@ -97,7 +105,7 @@ final class LoginPage: UIView {
             bottomBorder.trailingAnchor.constraint(equalTo: passwordField.trailingAnchor),
             bottomBorder.bottomAnchor.constraint(equalTo: passwordField.bottomAnchor),
             
-            title.bottomAnchor.constraint(equalTo: passwordField.topAnchor, constant: 8)
+            title.bottomAnchor.constraint(equalTo: passwordField.topAnchor, constant: -8)
            
         ])
 
@@ -148,6 +156,7 @@ final class LoginPage: UIView {
         firstTimeBtn.setTitle("Primeira vez?", for: .normal)
         firstTimeBtn.titleLabel?.adjustsFontSizeToFitWidth = true
         firstTimeBtn.setTitleColor(.titleColor, for: .normal)
+        firstTimeBtn.titleLabel?.font = UIFont.roboto(size: 16)
         firstTimeBtn.layer.cornerRadius = 10
         firstTimeBtn.backgroundColor = .clear
         firstTimeBtn.layer.borderWidth = 1
@@ -159,16 +168,27 @@ final class LoginPage: UIView {
     }()
     
     private lazy var buttonStackView: UIStackView = {
-        let spacerView = UIView()
-        spacerView.translatesAutoresizingMaskIntoConstraints = false
-        spacerView.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
-        
+//        let spacerView = UIView()
+//        spacerView.translatesAutoresizingMaskIntoConstraints = false
+//        spacerView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+//        
+//        
+//        let buttonStackView = UIStackView(arrangedSubviews: [
+//        loginBtn,
+//        forgetBtn,
+//        spacerView,
+//        firstTimeBtn
+//        ])
+//        
+//        buttonStackView.axis = .vertical
+//        buttonStackView.alignment = .center
+//        buttonStackView.spacing  = 10
+//        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
+//        return buttonStackView
+    
         let buttonStackView = UIStackView(arrangedSubviews: [
         loginBtn,
         forgetBtn,
-        spacerView,
-        firstTimeBtn
         ])
         
         buttonStackView.axis = .vertical
@@ -208,6 +228,7 @@ final class LoginPage: UIView {
         addSubview(logoImage)
         addSubview(loginStackView)
         addSubview(buttonStackView)
+        addSubview(firstTimeBtn)
     }
     
     private func setupConstraints() {
@@ -221,12 +242,15 @@ final class LoginPage: UIView {
             
             loginStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             loginStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            loginStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50),
-            loginStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50),
+            loginStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            loginStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             loginStackView.widthAnchor.constraint(equalToConstant: -20),
             
             buttonStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            buttonStackView.topAnchor.constraint(equalTo: loginStackView.bottomAnchor,constant: 50)
+            buttonStackView.topAnchor.constraint(equalTo: loginStackView.bottomAnchor,constant: 50),
+            
+            firstTimeBtn.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 60),
+            firstTimeBtn.centerXAnchor.constraint(equalTo: centerXAnchor)
                 
         ])
     }
