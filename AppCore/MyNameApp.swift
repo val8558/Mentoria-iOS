@@ -13,7 +13,7 @@ struct ArticleWaveApp: App {
     var body: some Scene {
         WindowGroup {
             ArticleStartViewRepresentable()
-                .padding()
+                .ignoresSafeArea()
         }
     }
 }

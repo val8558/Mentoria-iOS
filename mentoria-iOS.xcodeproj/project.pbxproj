@@ -20,6 +20,8 @@
 		6D7B92E92C45EC9500DB7F52 /* mentoria_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7B92E82C45EC9500DB7F52 /* mentoria_iOSUITests.swift */; };
 		6D7B92EB2C45EC9500DB7F52 /* mentoria_iOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7B92EA2C45EC9500DB7F52 /* mentoria_iOSUITestsLaunchTests.swift */; };
 		6D7E19C42C5969BB00E7B5DC /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7E19C32C5969BB00E7B5DC /* CustomView.swift */; };
+		6DE5FE4B2C63A86F003F9232 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE5FE4A2C63A86F003F9232 /* Color.swift */; };
+		6DE5FE4D2C63BEB7003F9232 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DE5FE4C2C63BEB7003F9232 /* Font.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		6D7B92E82C45EC9500DB7F52 /* mentoria_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mentoria_iOSUITests.swift; sourceTree = "<group>"; };
 		6D7B92EA2C45EC9500DB7F52 /* mentoria_iOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mentoria_iOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6D7E19C32C5969BB00E7B5DC /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
+		6DE5FE4A2C63A86F003F9232 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		6DE5FE4C2C63BEB7003F9232 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +109,7 @@
 		6D7B92C12C45EC9300DB7F52 = {
 			isa = PBXGroup;
 			children = (
+				6DE5FE492C63A710003F9232 /* Extensions */,
 				6D19362A2C496E6100AFB90D /* AppCore */,
 				6D7B92CC2C45EC9400DB7F52 /* mentoria-iOS */,
 				6D7B92DD2C45EC9500DB7F52 /* mentoria-iOSTests */,
@@ -159,6 +164,15 @@
 				6D7B92EA2C45EC9500DB7F52 /* mentoria_iOSUITestsLaunchTests.swift */,
 			);
 			path = "mentoria-iOSUITests";
+			sourceTree = "<group>";
+		};
+		6DE5FE492C63A710003F9232 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6DE5FE4A2C63A86F003F9232 /* Color.swift */,
+				6DE5FE4C2C63BEB7003F9232 /* Font.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,6 +307,8 @@
 			files = (
 				6D2C2F5D2C5D5C2A009372B1 /* LoginPage.swift in Sources */,
 				6D1936332C4982FD00AFB90D /* ViewController.swift in Sources */,
+				6DE5FE4D2C63BEB7003F9232 /* Font.swift in Sources */,
+				6DE5FE4B2C63A86F003F9232 /* Color.swift in Sources */,
 				6D1936302C496FAF00AFB90D /* MyNameApp.swift in Sources */,
 				6D19362C2C496EA100AFB90D /* StartViewRepresentable.swift in Sources */,
 				6D7E19C42C5969BB00E7B5DC /* CustomView.swift in Sources */,
