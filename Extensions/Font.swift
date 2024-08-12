@@ -17,7 +17,6 @@ extension UIFont {
             return UIFont(name: "Roboto-Medium", size: size) ?? .systemFont(ofSize: size, weight: weight)
         default:
             return UIFont(name: "Roboto-Regular", size: size) ?? .systemFont(ofSize: size, weight: weight)
-            
         }
     }
 }
