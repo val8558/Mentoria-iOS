@@ -8,25 +8,12 @@
 import UIKit
 
 final class ViewController: UIViewController {
-    private lazy var customView = LoginPage()
+    private lazy var customView = NewLoginPage()
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupCustomView()
+    override func loadView() {
+        view = customView
     }
     
-    private func setupCustomView() {
-        view.addSubview(customView)
-        customView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            customView.topAnchor.constraint(equalTo: view.topAnchor),
-            customView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            customView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            customView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ])
-    }
 }
 
 

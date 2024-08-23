@@ -1,101 +1,96 @@
 //
-//  LoginPage.swift
+//  NewLoginPage.swift
 //  mentoria-iOS
 //
-//  Created by Valmir Garcia on 02/08/24.
+//  Created by Valmir Garcia on 19/08/24.
 //
 
-import Foundation
 import UIKit
 
-final class LoginPage: UIView {
-    
+class CustomTextField: UITextField {
+    let padding = UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15)
+
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: padding)
+    }
+
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: padding)
+    }
+}
+
+final class NewLoginPage: UIView {
     
     private lazy var logoImage: UIImageView = {
-        let logoImage = UIImageView(image: UIImage(named: "logo.svg"))
+        let logoImage = UIImageView(image: UIImage(named: "TopImage.svg"))
         logoImage.translatesAutoresizingMaskIntoConstraints = false
-        logoImage.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        logoImage.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        logoImage.widthAnchor.constraint(equalToConstant: 400).isActive = true
         
         return logoImage
     }()
     
-    private lazy var userNameField: UITextField = {
-        
+    private lazy var userNameField: CustomTextField = {
+
         let title = UILabel()
         title.text = "Usuário"
         title.textAlignment = .center
-        title.font = .roboto(size: 12, weight: .regular)
+        title.font = .roboto(size: 14, weight: .bold)
         title.translatesAutoresizingMaskIntoConstraints = false
-        title.textColor = .titleColor
+        title.textColor = .black
         
-        let textField = UITextField()
-        textField.placeholder = "Usuário"
-        textField.textAlignment = .left
-        textField.font = .roboto(size: 14, weight: .regular)
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = .none
-        textField.textColor = .white
+        let userNameField = CustomTextField()
+        userNameField.textAlignment = .left
+        userNameField.font = .roboto(size: 14, weight: .regular)
+        userNameField.translatesAutoresizingMaskIntoConstraints = false
+        userNameField.borderStyle = .none
+        userNameField.layer.borderWidth = 0.5
+        userNameField.layoutMargins.left = 50
+        userNameField.layer.borderColor = UIColor.gray.cgColor
+        userNameField.layer.cornerRadius = 10
+        userNameField.textColor = .black
+        
+        userNameField.addSubview(title)
         
         let screenWidth = UIScreen.main.bounds.width
         
-        textField.widthAnchor.constraint(equalToConstant: screenWidth * 0.8).isActive = true
+        userNameField.widthAnchor.constraint(equalToConstant: screenWidth * 0.8).isActive = true
         
-        
-        let bottomBorder = UIView()
-        bottomBorder.translatesAutoresizingMaskIntoConstraints = false
-        bottomBorder.backgroundColor = .titleColor
-        
-        textField.addSubview(title)
-        textField.addSubview(bottomBorder)
         NSLayoutConstraint.activate([
-            bottomBorder.heightAnchor.constraint(equalToConstant: 1),
-            bottomBorder.leadingAnchor.constraint(equalTo: textField.leadingAnchor),
-            bottomBorder.trailingAnchor.constraint(equalTo: textField.trailingAnchor),
-            bottomBorder.bottomAnchor.constraint(equalTo: textField.bottomAnchor),
-            
-            title.bottomAnchor.constraint(equalTo: textField.topAnchor, constant: -8),
+            title.bottomAnchor.constraint(equalTo: userNameField.topAnchor, constant: -15)
         ])
             
-        return textField
+        return userNameField
     }()
     
-    private lazy var passwordField: UITextField = {
+    private lazy var passwordField: CustomTextField = {
         let title = UILabel()
         title.text = "Senha"
         title.textAlignment = .center
-        title.font = .roboto(size: 12, weight: .regular)
+        title.font = .roboto(size: 14, weight: .bold)
         title.translatesAutoresizingMaskIntoConstraints = false
-        title.textColor = .titleColor
+        title.textColor = .black
         
         
-        let passwordField = UITextField()
-        passwordField.placeholder = "Senha"
+        let passwordField = CustomTextField()
         passwordField.isSecureTextEntry = true
         passwordField.textAlignment = .left
         passwordField.font = .systemFont(ofSize: 14, weight: .regular)
         passwordField.translatesAutoresizingMaskIntoConstraints = false
         passwordField.borderStyle = .none
-        passwordField.textColor = .white
+        passwordField.layer.borderWidth = 0.5
+        passwordField.layer.borderColor = UIColor.gray.cgColor
+        passwordField.layer.cornerRadius = 10
+        passwordField.textColor = .black
         
         let screenWidth = UIScreen.main.bounds.width
         
         passwordField.widthAnchor.constraint(equalToConstant: screenWidth * 0.8).isActive = true
-        
-        let bottomBorder = UIView()
-        bottomBorder.translatesAutoresizingMaskIntoConstraints = false
-        bottomBorder.backgroundColor = .titleColor
-        
+         
         passwordField.addSubview(title)
-        passwordField.addSubview(bottomBorder)
+
+        
         NSLayoutConstraint.activate([
-            bottomBorder.heightAnchor.constraint(equalToConstant: 1),
-            bottomBorder.leadingAnchor.constraint(equalTo: passwordField.leadingAnchor),
-            bottomBorder.trailingAnchor.constraint(equalTo: passwordField.trailingAnchor),
-            bottomBorder.bottomAnchor.constraint(equalTo: passwordField.bottomAnchor),
-            
-            title.bottomAnchor.constraint(equalTo: passwordField.topAnchor, constant: -8)
-           
+            title.bottomAnchor.constraint(equalTo: passwordField.topAnchor, constant: -15)
         ])
         return passwordField
     }()
@@ -109,11 +104,9 @@ final class LoginPage: UIView {
         loginBtn.setTitle("Login", for: .normal)
         loginBtn.titleLabel?.adjustsFontSizeToFitWidth = true
         loginBtn.titleLabel?.font = UIFont.roboto(size: 16)
-        loginBtn.setTitleColor(.titleColor, for: .normal)
+        loginBtn.setTitleColor(.black, for: .normal)
         loginBtn.layer.cornerRadius = 10
-        loginBtn.backgroundColor = .clear
-        loginBtn.layer.borderWidth = 1
-        loginBtn.layer.borderColor = UIColor.titleColor.cgColor
+        loginBtn.backgroundColor = .backGroundColor
 
         loginBtn.widthAnchor.constraint(equalToConstant: loginBtnWidth).isActive = true
         
@@ -126,7 +119,7 @@ final class LoginPage: UIView {
         forgetBtn.translatesAutoresizingMaskIntoConstraints = false
         forgetBtn.setTitle("Esqueceu a senha?", for: .normal)
         forgetBtn.titleLabel?.font = UIFont.roboto(size: 12)
-        forgetBtn.setTitleColor(.titleColor, for: .normal)
+        forgetBtn.setTitleColor(.black, for: .normal)
         forgetBtn.layer.cornerRadius = 25
         forgetBtn.backgroundColor = .clear
         
@@ -139,14 +132,13 @@ final class LoginPage: UIView {
         let firstTimeWidth: CGFloat = 250
         
         firstTimeBtn.translatesAutoresizingMaskIntoConstraints = false
-        firstTimeBtn.setTitle("Primeira vez?", for: .normal)
+        firstTimeBtn.setTitle("Primeiro Acesso", for: .normal)
         firstTimeBtn.titleLabel?.adjustsFontSizeToFitWidth = true
-        firstTimeBtn.setTitleColor(.titleColor, for: .normal)
+        firstTimeBtn.setTitleColor(.black, for: .normal)
         firstTimeBtn.titleLabel?.font = UIFont.roboto(size: 16)
         firstTimeBtn.layer.cornerRadius = 10
-        firstTimeBtn.backgroundColor = .clear
-        firstTimeBtn.layer.borderWidth = 1
-        firstTimeBtn.layer.borderColor = UIColor.titleColor.cgColor
+        firstTimeBtn.backgroundColor = .backGroundColor
+        firstTimeBtn.layer.cornerRadius = 10
 
         firstTimeBtn.widthAnchor.constraint(equalToConstant:firstTimeWidth).isActive = true
         
@@ -175,7 +167,7 @@ final class LoginPage: UIView {
         
         loginStackView.axis = .vertical
         loginStackView.alignment = .center
-        loginStackView.spacing = 30
+        loginStackView.spacing = 50
         loginStackView.translatesAutoresizingMaskIntoConstraints = false
         return loginStackView
     }()
@@ -192,7 +184,6 @@ final class LoginPage: UIView {
     
     
     private func setupView() {
-        backgroundColor = .black
         addSubview(logoImage)
         addSubview(loginStackView)
         addSubview(buttonStackView)
@@ -201,24 +192,23 @@ final class LoginPage: UIView {
     
     private func setupConstraints() {
         
-        NSLayoutConstraint.activate([  
+        NSLayoutConstraint.activate([
             logoImage.centerXAnchor.constraint(equalTo: centerXAnchor),
-            logoImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50),
-            logoImage.widthAnchor.constraint(equalToConstant: 200),
-            logoImage.heightAnchor.constraint(equalToConstant: 200),
         ])
         
-        NSLayoutConstraint.activate([ 
+        NSLayoutConstraint.activate([
             loginStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             loginStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             loginStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             loginStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            loginStackView.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 50)
         ])
         
-        NSLayoutConstraint.activate([ 
+        NSLayoutConstraint.activate([
             buttonStackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             buttonStackView.topAnchor.constraint(equalTo: loginStackView.bottomAnchor,constant: 50),
-            forgetBtn.widthAnchor.constraint(equalTo: loginBtn.widthAnchor, multiplier: 0.5),])
+            forgetBtn.widthAnchor.constraint(equalTo: loginBtn.widthAnchor, multiplier: 0.5),
+        ])
         
         NSLayoutConstraint.activate([
             firstTimeBtn.topAnchor.constraint(equalTo: buttonStackView.bottomAnchor, constant: 60),
