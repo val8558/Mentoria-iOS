@@ -8,7 +8,7 @@
 import UIKit
 
 final class ViewController: UIViewController {
-    private lazy var customView = NewLoginPage()
+    private lazy var customView = AccessPage()
     
     override func loadView() {
         view = customView
