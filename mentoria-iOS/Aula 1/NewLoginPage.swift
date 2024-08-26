@@ -21,6 +21,13 @@ class CustomTextField: UITextField {
 
 final class NewLoginPage: UIView {
     
+    private lazy var scrollView: UIScrollView = {
+            let scrollView = UIScrollView()
+            scrollView.translatesAutoresizingMaskIntoConstraints = false
+            return scrollView
+        }()
+
+    
     private lazy var logoImage: UIImageView = {
         let logoImage = UIImageView(image: UIImage(named: "TopImage.svg"))
         logoImage.translatesAutoresizingMaskIntoConstraints = false
@@ -48,6 +55,7 @@ final class NewLoginPage: UIView {
         userNameField.layer.borderColor = UIColor.gray.cgColor
         userNameField.layer.cornerRadius = 10
         userNameField.textColor = .black
+        userNameField.isUserInteractionEnabled = true
         
         userNameField.addSubview(title)
         
@@ -81,6 +89,7 @@ final class NewLoginPage: UIView {
         passwordField.layer.borderColor = UIColor.gray.cgColor
         passwordField.layer.cornerRadius = 10
         passwordField.textColor = .black
+        userNameField.isUserInteractionEnabled = true
         
         let screenWidth = UIScreen.main.bounds.width
         
@@ -184,13 +193,21 @@ final class NewLoginPage: UIView {
     
     
     private func setupView() {
-        addSubview(logoImage)
-        addSubview(loginStackView)
-        addSubview(buttonStackView)
-        addSubview(firstTimeBtn)
+        addSubview(scrollView)
+        scrollView.addSubview(logoImage)
+        scrollView.addSubview(loginStackView)
+        scrollView.addSubview(buttonStackView)
+        scrollView.addSubview(firstTimeBtn)
     }
     
     private func setupConstraints() {
+        
+        NSLayoutConstraint.activate([
+                    scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                    scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
+                    scrollView.topAnchor.constraint(equalTo: topAnchor),
+                    scrollView.bottomAnchor.constraint(equalTo: bottomAnchor)
+                ])
         
         NSLayoutConstraint.activate([
             logoImage.centerXAnchor.constraint(equalTo: centerXAnchor),

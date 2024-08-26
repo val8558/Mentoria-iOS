@@ -9,6 +9,12 @@ import UIKit
 
 final class AccessPage: UIView {
     
+    private lazy var scrollView: UIScrollView = {
+            let scrollView = UIScrollView()
+            scrollView.translatesAutoresizingMaskIntoConstraints = false
+            return scrollView
+        }()
+    
     private lazy var topImage: UIImageView = {
         let topImage = UIImageView(image: UIImage(named: "topArch"))
         topImage.translatesAutoresizingMaskIntoConstraints = false
@@ -43,6 +49,7 @@ final class AccessPage: UIView {
         accessField.layer.borderColor = UIColor.gray.cgColor
         accessField.layer.cornerRadius = 10
         accessField.textColor = .black
+        accessField.isUserInteractionEnabled = true
         
         accessField.addSubview(title)
         
@@ -85,10 +92,14 @@ final class AccessPage: UIView {
         return bottomImage
     }()
     
+    private var accessFieldBottomConstraint: NSLayoutConstraint!
+    private var logoImageTopConstraint: NSLayoutConstraint!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
         setupConstraints()
+        setupKeyboardNotifications()
     }
     
     required init?(coder: NSCoder) {
@@ -106,6 +117,9 @@ final class AccessPage: UIView {
     
     private func setupConstraints() {
         
+        logoImageTopConstraint = logoImage.topAnchor.constraint(equalTo: topImage.bottomAnchor, constant: 88)
+        accessFieldBottomConstraint = accessField.topAnchor.constraint(equalTo: logoImage.bottomAnchor, constant: 72)
+        
         NSLayoutConstraint.activate([
             topImage.centerXAnchor.constraint(equalTo: centerXAnchor),
             topImage.topAnchor.constraint(equalTo: topAnchor, constant: -5)
@@ -113,7 +127,7 @@ final class AccessPage: UIView {
         
         NSLayoutConstraint.activate([
             logoImage.centerXAnchor.constraint(equalTo: centerXAnchor),
-            logoImage.topAnchor.constraint(equalTo: topImage.bottomAnchor, constant: 88)
+            logoImageTopConstraint
         ])
         
         NSLayoutConstraint.activate([
@@ -130,7 +144,39 @@ final class AccessPage: UIView {
             bottomImage.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 5)
         ])
     }
-}
+    
+    private func setupKeyboardNotifications() {
+           NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+           NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+       }
+
+       @objc private func keyboardWillShow(notification: NSNotification) {
+           if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+               let keyboardHeight = keyboardFrame.height
+               accessFieldBottomConstraint.constant = -keyboardHeight + 120
+               logoImageTopConstraint.constant = 20
+               UIView.animate(withDuration: 0.3) {
+                   self.layoutIfNeeded()
+               }
+           }
+       }
+
+       @objc private func keyboardWillHide(notification: NSNotification) {
+           accessFieldBottomConstraint.constant = 72
+           logoImageTopConstraint.constant = 88
+           
+           UIView.animate(withDuration: 0.3) {
+               self.layoutIfNeeded()
+           }
+       }
+
+       deinit {
+           NotificationCenter.default.removeObserver(self)
+       }
+    
+    
+   }
+
 
 
 
